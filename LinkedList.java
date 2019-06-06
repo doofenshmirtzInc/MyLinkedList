@@ -84,7 +84,7 @@ public class LinkedList<T>{
         public <T> T next(){
                 if(!hasNext()) throw new NoSuchElementException();
 
-                T temp = current.data;
+                T temp = (T)current.data;
                 previous = current;
                 current = current.next;
                 return temp;
@@ -97,14 +97,14 @@ public class LinkedList<T>{
         public <T> T peek(){
                 if(!hasNext()) throw new IllegalStateException();
 
-                return current.data;
+                return (T)current.data;
         }
 
         public void delete(){
                 if(current == null) throw new IllegalStateException();
                 else if(previous == null){ //meaning that current points to head node
                         head = head.next;
-                        current = head;
+                        current = (Node<T>)head;
                         //prevoius is still null
                 }
         }
@@ -114,7 +114,7 @@ public class LinkedList<T>{
                 if(current == null && previous != null){ //if at end of list
                         previous.next = new Node<T>(data);
                 }else if(current == null || previous == null){ //if list is empty of current points to head
-                        LinkedList.this.prepend(data);
+                        LinkedList.this.prepend((T)data);
                 }else{
                         Node<T> temp = new Node(data, current);
                         previous.next = temp;
