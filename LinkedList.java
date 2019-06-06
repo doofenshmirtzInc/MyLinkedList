@@ -1,4 +1,5 @@
 import java.util.NoSuchElementException;
+import java.util.Iterator;
 
 //Generic LinkedList class with generic Node inner class
 public class LinkedList<T>{
@@ -9,11 +10,6 @@ public class LinkedList<T>{
 
     public LinkedList(T data){
         head = new Node<T>(data);
-    }
-
-    public LinkedList(T data, Node<T> ref){
-        this.data = data;
-        head.next = ref;    //think this is right. Will have to check later
     }
 
 
@@ -66,22 +62,22 @@ public class LinkedList<T>{
     }
 
 
-    public Iterator<T> iterator(){
+    public ListIterator<T> iterator(){
         return new ListIterator<T>();
     }
 
 
 
-    private class ListIterator<T>{
+    public class ListIterator<T>{
         private Node<T> current, previous;
 
         public ListIterator(){
-                current = head;
+                current = (Node<T>)head;
                 previous = null;
         }
 
         public void restart(){
-                current = head;
+                current = (Node<T>)head;
                 previous = null;
         }
 
