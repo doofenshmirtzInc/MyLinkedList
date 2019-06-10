@@ -2,14 +2,14 @@ import java.util.NoSuchElementException;
 import java.util.Iterator;
 
 //Generic LinkedList class with generic Node inner class
-public class LinkedList<T>{
+public class LinkedList<E>{
 
-    private Node<T> head;
+    private Node<E> head;
 
     public LinkedList(){head = null;}
 
-    public LinkedList(T data){
-        head = new Node<T>(data);
+    public LinkedList(E data){
+        head = new Node<E>(data);
     }
 
 
@@ -26,25 +26,25 @@ public class LinkedList<T>{
 
 
 
-    public void append(T data){
+    public void append(E data){
         if(head == null) return;
 
-        Node<T> current = head;
+        Node<E> current = head;
         while(current.next != null){
             current = current.next;
         }
-        current.next = new Node<T>(data);
+        current.next = new Node<E>(data);
     }
 
 
     //just creates new head node
-    public void prepend(T data){
-        head = new Node<T>(data, head);
+    public void prepend(E data){
+        head = new Node<E>(data, head);
     }
 
 
     //deletes the node containing 'data' if exists
-    public void deleteWithValue(T data){
+    public void deleteWithValue(E data){
         if(head == null) return;
         if(head.data.equals(data)){
             head = head.next;
@@ -62,29 +62,35 @@ public class LinkedList<T>{
     }
 
 
-    public ListIterator<T> iterator(){
-        return new ListIterator<T>();
+    public ListIterator<E> iterator(){
+        return new ListIterator<E>();
     }
 
 
 
-    public class ListIterator<T>{
-        private Node<T> current, previous;
+
+
+
+
+
+
+    public class ListIterator<U>{
+        private Node<U> current, previous;
 
         public ListIterator(){
-                current = (Node<T>)head;
+                current = (Node<U>)head;
                 previous = null;
         }
 
         public void restart(){
-                current = (Node<T>)head;
+                current = (Node<U>)head;
                 previous = null;
         }
 
-        public <T> T next(){
+        public <U> U next(){
                 if(!hasNext()) throw new NoSuchElementException();
 
-                T temp = (T)current.data;
+                U temp = (U)current.data;
                 previous = current;
                 current = current.next;
                 return temp;
@@ -94,29 +100,29 @@ public class LinkedList<T>{
                 return (!(current == null));
         }
 
-        public <T> T peek(){
+        public <U> U peek(){
                 if(!hasNext()) throw new IllegalStateException();
 
-                return (T)current.data;
+                return (U)current.data;
         }
 
         public void delete(){
                 if(current == null) throw new IllegalStateException();
                 else if(previous == null){ //meaning that current points to head node
                         head = head.next;
-                        current = (Node<T>)head;
+                        current = (Node<U>)head;
                         //prevoius is still null
                 }
         }
 
 
-        public void addHere(T data){
+        public void addHere(U data){
                 if(current == null && previous != null){ //if at end of list
-                        previous.next = new Node<T>(data);
+                        previous.next = new Node<U>(data);
                 }else if(current == null || previous == null){ //if list is empty of current points to head
-                        LinkedList.this.prepend((T)data);
+                        LinkedList.this.prepend((E)data);
                 }else{
-                        Node<T> temp = new Node(data, current);
+                        Node<U> temp = new Node(data, current);
                         previous.next = temp;
                         previous = temp;
                 }
@@ -124,7 +130,7 @@ public class LinkedList<T>{
         }
 
 
-        public void changeHere(T data){
+        public void changeHere(U data){
                 if(current == null) throw new IllegalStateException();
                 else current.data = data;
         }
