@@ -5,7 +5,6 @@ public class IteratorTest{
                 LinkedList<String> myList = new LinkedList<String>();
                 LinkedList.ListIterator itr = myList.iterator();
 
-                itr.addHere("Joe");
                 myList.append("Joe");
                 myList.append("John");
                 myList.append("Maxamillion");

@@ -27,13 +27,14 @@ public class LinkedList<E>{
 
 
     public void append(E data){
-        if(head == null) return;
-
-        Node<E> current = head;
-        while(current.next != null){
-            current = current.next;
+        if(head == null) head = new Node<E>(data);
+        else{
+                Node<E> pos = head;
+                while(pos.next != null){
+                        pos = pos.next;
+                }
+                pos.next = new Node<E>(data);
         }
-        current.next = new Node<E>(data);
     }
 
 
